@@ -12,6 +12,8 @@ public interface UserDetailsDAO {
 	public boolean delete(UserDetails userDetails);
 
 	public UserDetails get(String id);
+	
+	public UserDetails isValidUser(String id,String password);
 
 	public List<UserDetails> list();
 }

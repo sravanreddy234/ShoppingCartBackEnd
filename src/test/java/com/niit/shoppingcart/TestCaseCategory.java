@@ -40,34 +40,34 @@ public class TestCaseCategory {
 	{
 		List<Category> list = categoryDAO.list();
 		int rowCount = list.size();
-		assertEquals("Category List Test Case", rowCount,2);
-	}
+		assertEquals("Category List Test Case", rowCount,4);
+	}*/
 	
 	@Test
 	public void categoryAddTestCase()
 	{
-		category.setId("MOB_009");
+		category.setId("MOB_011");
 		category.setName("Coolkk");
 		category.setDescription("this Chgghgg");
 		boolean flag = categoryDAO.save(category);
 		assertEquals(flag, true);
-	}*/
+	}
 	
-    @Test
+    /*@Test
 	public void deleteTestCase(){
-		category.setId("MOB_009");
+		category.setId("MOB_008");
 		assertEquals(categoryDAO.delete(category),true);
 	}
 	
-	/*@Test
+	@Test
 	public void updateTestCase(){
 		category.setId("MOB_003");
-		category.setName("asus");
-		category.setDescription("this is asus");
+		category.setName("Iphone");
+		category.setDescription("this is Iphone");
 		assertEquals(categoryDAO.update(category),true);
-	}*/
+	}
 
-	/*@Test
+	@Test
 	public void getCategoryTestCase(){
 	category=categoryDAO.get("MOB_003");
 	System.out.println(category.getDescription());

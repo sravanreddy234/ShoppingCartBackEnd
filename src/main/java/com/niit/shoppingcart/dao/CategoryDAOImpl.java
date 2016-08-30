@@ -64,7 +64,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 		String  hql = " from Category where id ="+"'"+id+"'";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		List<Category> list = query.list();
-		if(list == null)
+		if(list == null || list.isEmpty())
 		{
 			return null;
 		}

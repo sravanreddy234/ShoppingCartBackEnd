@@ -46,14 +46,14 @@ public class TestCaseSupplier {
 	@Test
 	public void supplierAddTestCase()
 	{
-		supplier.setId("MOB_009");
-		supplier.setName("Coolkk");
-		supplier.setAddress("Hyderabad");
-		boolean flag = supplierDAO.save(supplier);
-		assertEquals(flag, true);
+		supplier.setId("MO01");
+		supplier.setName("Cool");
+		supplier.setAddress("Hyd");
+		//boolean flag = supplierDAO.save(supplier);
+		assertEquals(supplierDAO.save(supplier), true);
 	}
 	
-    @Test
+    /*@Test
 	public void deleteTestCase(){
 		supplier.setId("MOB_009");
 		assertEquals(supplierDAO.delete(supplier),true);

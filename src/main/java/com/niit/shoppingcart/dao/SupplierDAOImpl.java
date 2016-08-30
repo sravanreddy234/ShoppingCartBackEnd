@@ -12,9 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.shoppingcart.model.Supplier;
 
-@Repository("supplierdao")
+@Repository("supplierDAO")
 @EnableTransactionManagement
-public class SupplierDAOImpl {
+public class SupplierDAOImpl implements SupplierDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 	@Transactional
@@ -23,7 +23,7 @@ public class SupplierDAOImpl {
 		try {
 			sessionFactory.getCurrentSession().save(supplier);
 			return true;
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
@@ -35,7 +35,7 @@ public class SupplierDAOImpl {
 		try {
 			sessionFactory.getCurrentSession().update(supplier);
 			return true;
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
@@ -46,7 +46,7 @@ public class SupplierDAOImpl {
 		try {
 			sessionFactory.getCurrentSession().delete(supplier);
 			return true;
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;

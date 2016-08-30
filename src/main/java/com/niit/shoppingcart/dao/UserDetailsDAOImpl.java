@@ -12,9 +12,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.shoppingcart.model.UserDetails;
-
+@Repository("userDetailsDAO")
 @EnableTransactionManagement
-@Repository
+
 public class UserDetailsDAOImpl implements UserDetailsDAO {
 	
 	@Autowired
@@ -26,7 +26,7 @@ public class UserDetailsDAOImpl implements UserDetailsDAO {
 		try {
 			sessionFactory.getCurrentSession().save(userDetails);
 			return true;
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
@@ -38,7 +38,7 @@ public class UserDetailsDAOImpl implements UserDetailsDAO {
 		try {
 			sessionFactory.getCurrentSession().update(userDetails);
 			return true;
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
@@ -49,7 +49,7 @@ public class UserDetailsDAOImpl implements UserDetailsDAO {
 		try {
 			sessionFactory.getCurrentSession().delete(userDetails);
 			return true;
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
@@ -60,7 +60,7 @@ public class UserDetailsDAOImpl implements UserDetailsDAO {
 		String  hql = " from UserDetails where id ="+"'"+id+"'";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		List<UserDetails> list = query.list();
-		if(list == null)
+		if(list == null || list.isEmpty())
 		{
 			return null;
 		}
@@ -69,6 +69,26 @@ public class UserDetailsDAOImpl implements UserDetailsDAO {
 			return list.get(0);
 		}
 	}
+	
+	public UserDetails isValidUser(String id,String password)
+	{
+		//QUERY:-  select * from UserDetails where id='101' and password='niit'
+		String hql="from UserDetails where id='"+ id +"' and password='" + password +"'";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<UserDetails> list = query.list();
+		if(list == null || list.isEmpty())
+		{
+			return null;
+		}
+		else
+		{
+			return list.get(0);
+		}
+		
+		
+	}
+		
+	
 	@Transactional
 	public List<UserDetails> list() {
 		String hql = "from UserDetails";

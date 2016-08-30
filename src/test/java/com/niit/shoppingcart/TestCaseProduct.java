@@ -53,7 +53,7 @@ public class TestCaseProduct {
 		List<Product> list = productDAO.list();
 		int rowCount = list.size();
 		assertEquals("Product List Test Case", rowCount,2);
-	}*/
+	}
 	
 	@Test
 	public void deleteTestCase(){
@@ -68,13 +68,13 @@ public class TestCaseProduct {
 		product.setDescription("this is asus");
 		product.setPrice("15000");
 		assertEquals(productDAO.update(product),true);
-	}
+	}*/
 
 	@Test
 	public void getProductTestCase(){
 		product=productDAO.get("PRO_002");
 		System.out.println(product.getDescription());
 		assertEquals(product.getName(),"asus");
-	}*/
+	}
 	
  }
