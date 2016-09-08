@@ -35,7 +35,7 @@ public class TestCaseUserDetails {
 	
 	
 	
-	@Test
+	/*@Test
 	public void userDetailsAddTestCase()
 	{
 		userDetails.setId("PRO_004");
@@ -55,7 +55,7 @@ public class TestCaseUserDetails {
 		List<UserDetails> list = userDetailsDAO.list();
 		int rowCount = list.size();
 		assertEquals("UserDetails List Test Case", rowCount,2);
-	}*/
+	}
 	
 	@Test
 	public void deleteTestCase(){
@@ -70,13 +70,13 @@ public class TestCaseUserDetails {
 		userDetails.setDescription("this is asus");
 		userDetails.setPrice("15000");
 		assertEquals(userDetailsDAO.update(userDetails),true);
-	}
+	}*/
 
 	@Test
 	public void getUserDetailsTestCase(){
 		userDetails=userDetailsDAO.get("PRO_002");
-		System.out.println(userDetails.getDescription());
-		assertEquals(userDetails.getName(),"asus");
-	}*/
+		System.out.println(userDetails.getName());
+		assertEquals(userDetails.getName(),"COOLPAD");
+	}
 	
  }
