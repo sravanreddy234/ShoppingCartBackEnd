@@ -3,8 +3,10 @@ package com.niit.shoppingcart.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table
@@ -15,6 +17,17 @@ public class Product {
 	private String name;
 	private String description;
 	private String price;
+	
+	@Transient
+	private MultipartFile image;
+	
+	
+	public MultipartFile getImage() {
+		return image;
+	}
+	public void setImage(MultipartFile image) {
+		this.image = image;
+	}
 	public String getPrice() {
 		return price;
 	}
