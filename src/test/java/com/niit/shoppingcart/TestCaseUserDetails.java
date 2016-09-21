@@ -38,15 +38,16 @@ public class TestCaseUserDetails {
 	/*@Test
 	public void userDetailsAddTestCase()
 	{
-		userDetails.setId("PRO_004");
-		userDetails.setName("COOLPAD");
+		userDetails.setId("576");
+		userDetails.setName("sravan");
 		userDetails.setAddress("hyd");
 		userDetails.setContact("99484");
 		userDetails.setEmail("srava@gmail.com");
 		userDetails.setPassword("sravan");
+		userDetails.setRole("ROLE_USER");
 		
 		assertEquals(userDetailsDAO.save(userDetails),true);
-	}
+	}*/
 	
 	
 	/*@Test
@@ -70,13 +71,13 @@ public class TestCaseUserDetails {
 		userDetails.setDescription("this is asus");
 		userDetails.setPrice("15000");
 		assertEquals(userDetailsDAO.update(userDetails),true);
-	}*/
+	}
 
 	@Test
 	public void getUserDetailsTestCase(){
 		userDetails=userDetailsDAO.get("PRO_002");
 		System.out.println(userDetails.getName());
 		assertEquals(userDetails.getName(),"COOLPAD");
-	}
+	}*/
 	
  }

@@ -69,8 +69,8 @@ public class UserDetailsDAOImpl implements UserDetailsDAO {
 			return list.get(0);
 		}
 	}
-	
-	public UserDetails isValidUser(String id,String password)
+	@Transactional
+	public boolean isValidUser(String id,String password)
 	{
 		//QUERY:-  select * from UserDetails where id='101' and password='niit'
 		String hql="from UserDetails where id='"+ id +"' and password='" + password +"'";
@@ -78,11 +78,11 @@ public class UserDetailsDAOImpl implements UserDetailsDAO {
 		List<UserDetails> list = query.list();
 		if(list == null || list.isEmpty())
 		{
-			return null;
+			return true;
 		}
 		else
 		{
-			return list.get(0);
+			return false;
 		}
 		
 		
