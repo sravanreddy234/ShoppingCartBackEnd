@@ -1,45 +1,83 @@
 package com.niit.shoppingcart.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
+import java.io.Serializable;
+import java.util.UUID;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import org.springframework.stereotype.Component;
 
 @Entity
 @Table
 @Component
-public class Cart {
+public class Cart implements Serializable{
+	public Cart(){
+		this.cart_id="CART"+UUID.randomUUID().toString().substring(24).toUpperCase();
+	}
 	
-	@Id @GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
-	
+    private static final long serialVersionUID = 1L;
+ 
+	@Id
+	private String cart_id;	
+	private String productID;
+	private String userID;
 	private String productName;
-	
-	private int price;
-	
+	private int productPrice;
 	private int quantity;
+
+	private int total;
+	private String status;
 	
-	private char status;
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
+	@OneToOne
+	@JoinColumn(name="userID",  insertable=false, nullable=false, updatable= false)
+	private UserDetails userDetails;
 	
-	private String userId;
-
-	public String getUserId() {
-		return userId;
+	public UserDetails getUserDetails() {
+		return userDetails;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserDetails(UserDetails userDetails) {
+		this.userDetails = userDetails;
 	}
 
-	public int getId() {
-		return id;
+	public String getUserID() {
+		return userID;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+
+	
+
+	public String getProductID() {
+		return productID;
+	}
+
+	public void setProductID(String productID) {
+		this.productID = productID;
+	}
+
+
+
+	public String getCart_id() {
+		return cart_id;
+		}
+
+	public void setCart_id(String cart_id) {
+		this.cart_id = cart_id;
 	}
 
 	public String getProductName() {
@@ -50,12 +88,12 @@ public class Cart {
 		this.productName = productName;
 	}
 
-	public int getPrice() {
-		return price;
+	public int getProductPrice() {
+		return productPrice;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
+	public void setProductPrice(int productPrice) {
+		this.productPrice = productPrice;
 	}
 
 	public int getQuantity() {
@@ -66,13 +104,17 @@ public class Cart {
 		this.quantity = quantity;
 	}
 
-	public char getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(char status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+		
 
+
+
+	
+	
 }

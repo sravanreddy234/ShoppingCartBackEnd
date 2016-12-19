@@ -1,4 +1,4 @@
-package com.niit.shoppingcart.dao;
+/*package com.niit.shoppingcart.dao;
 
 import java.util.List;
 
@@ -7,8 +7,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 
 import org.hibernate.query.Query;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -20,7 +18,7 @@ import com.niit.shoppingcart.model.Category;
 @EnableTransactionManagement
 public class CategoryDAOImpl implements CategoryDAO {
 	
-	private static final Logger log = LoggerFactory.getLogger(CategoryDAO.class);
+	
 	
 			
 			
@@ -30,13 +28,10 @@ public class CategoryDAOImpl implements CategoryDAO {
 	public boolean save(Category category) {
 		
 		try {
-			log.debug("starting of the save method");
 			sessionFactory.getCurrentSession().save(category);
-			log.debug("end of the save method");
 			return true;
 		} catch (HibernateException e) {
 			// TODO Auto-generated catch block
-			log.error("exception occurred in save method"+e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -45,13 +40,10 @@ public class CategoryDAOImpl implements CategoryDAO {
 	@Transactional
 	public boolean update(Category category) {
 		try {
-			log.debug("starting of the save method");
 			sessionFactory.getCurrentSession().update(category);
-			log.debug("end of the save method");
 			return true;
 		} catch (HibernateException e) {
 			// TODO Auto-generated catch block
-			log.error("exception occurred in save method"+e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -59,30 +51,21 @@ public class CategoryDAOImpl implements CategoryDAO {
 	@Transactional
 	public boolean delete(Category category) {
 		try {
-			log.debug("starting of the save method");
 			sessionFactory.getCurrentSession().delete(category);
-			log.debug("end of the save method");
 			return true;
 		} catch (HibernateException e) {
 			// TODO Auto-generated catch block
-			log.error("exception occurred in save method"+e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
 	}
 	@Transactional
 	public Category get(String id) {
-		log.debug("starting of the method get");
-		//select * from Product where id='101'// we giving qotations because  we have taken varchar
-	log.info("trying to get product based on id:"+id);
-	String hql=" from Product where id =" + " ' " + id + " ' ";
-	log.info("the hsql query is :"+ hql);
+		String  hql = " from Category where id ="+"'"+id+"'";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		List<Category> list = query.list();
 		if(list == null || list.isEmpty())
 		{
-			log.info("no products are avaliable with this id:"+id);
-		
 			return null;
 		}
 		else
@@ -92,14 +75,170 @@ public class CategoryDAOImpl implements CategoryDAO {
 	}
 	@Transactional
 	public List<Category> list() {
-		log.debug("starting of the list method");
 		String hql = "from Category";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		log.debug("end of the method list");
-		List<Category> list =query.list();
-		if(list==null || list.isEmpty()){
-			log.info("no products are avaliable");
+		return query.list();
+	}
+	
+	@Transactional
+	public Category getByName(String name){
+		String hql= " from Category where name ="+"'"+name+"'";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<Category> list = (List<Category>) query.list();
+		if(list != null && !list.isEmpty())
+		{
+			return list.get(0);
 		}
-		return list;
+		else
+		{
+			return null;
+		}
 	}
+	
+
+}
+*/
+
+
+
+
+package com.niit.shoppingcart.dao;
+
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.niit.shoppingcart.dao.CategoryDAO;
+import com.niit.shoppingcart.model.Category;
+import com.niit.shoppingcart.model.Product;
+
+@Repository(value="categoryDAO")
+public class CategoryDAOImpl implements CategoryDAO {
+
+	@Autowired
+	private SessionFactory sessionFactory;
+
+	public CategoryDAOImpl(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
 	}
+
+	@Transactional
+	public boolean save(Category category) {
+		
+		try {
+			sessionFactory.getCurrentSession().save(category);
+			return true;
+		} catch (HibernateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+	@Transactional
+	public boolean update(Category category) {
+		try {
+			sessionFactory.getCurrentSession().update(category);
+			return true;
+		} catch (HibernateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	@Transactional
+	public boolean delete(Category category) {
+		try {
+			sessionFactory.getCurrentSession().delete(category);
+			return true;
+		} catch (HibernateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	/*@Transactional
+	public void delete(String categoryId) {
+		Category categoryToDelete = new Category();
+		categoryToDelete.setCategoryId(categoryId);
+		sessionFactory.getCurrentSession().delete(categoryToDelete);
+
+	}*/
+
+	@Transactional
+	public Category get(String categoryId) {
+
+		// sessionFactory.getCurrentSession().get(Category.class,id);
+		String hql = "from Category where categoryId=" + "'" + categoryId + "'";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<Category> listCategory = query.getResultList();
+		if (listCategory != null && !listCategory.isEmpty()) {
+			return listCategory.get(0);
+		}
+
+		return null;
+
+	}
+
+	@Transactional
+	public List<Category> listCategory() {
+		@SuppressWarnings("unchecked")
+		List<Category> listCategory = sessionFactory.getCurrentSession().createCriteria(Category.class)
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		return listCategory;
+	}
+	
+	@Transactional
+	public List<Product> selectedCategoryProductList(String categoryId)
+	{
+		String hql="from Product where categoryId=" + "'" + categoryId + "'"+"and isOutOffStock=" + "'" + false + "'";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<Product> listSelectedProducts = query.getResultList();
+		return listSelectedProducts; 
+		
+	
+	}
+	
+	@Transactional
+	public int getProductCountByCategory(String id)
+	{
+		String hql="from Product where categoryId=" + "'" + id + "'";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<Product> listSelectedProducts = query.getResultList();
+		return listSelectedProducts.size(); 
+		
+	
+	}
+
+	@Transactional
+	public List<Product> selectAllCategoryProducts(String categoryId) {
+
+		String hql="from Product where categoryId=" + "'" + categoryId + "'";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<Product> listSelectedProducts = query.getResultList();
+		return listSelectedProducts; 
+		
+	}
+
+	
+
+	@Transactional
+	public List<Category> list() {
+		String hql = "from Category";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		return query.list();
+	}
+
+	public Category getByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

@@ -43,7 +43,7 @@ public class TestCaseSupplier {
 		assertEquals("Supplier List Test Case", rowCount,2);
 	}*/
 	
-	@Test
+	/*@Test
 	public void supplierAddTestCase()
 	{
 		supplier.setId("MO01");
@@ -51,7 +51,7 @@ public class TestCaseSupplier {
 		supplier.setAddress("Hyd");
 		//boolean flag = supplierDAO.save(supplier);
 		assertEquals(supplierDAO.save(supplier), true);
-	}
+	}*/
 	
     /*@Test
 	public void deleteTestCase(){

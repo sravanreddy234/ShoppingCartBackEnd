@@ -15,8 +15,17 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.niit.shoppingcart.model.BillingAddress;
+import com.niit.shoppingcart.model.CardDetail;
+import com.niit.shoppingcart.model.Cart;
 import com.niit.shoppingcart.model.Category;
+import com.niit.shoppingcart.model.CheckoutDetails;
+
+
+import com.niit.shoppingcart.model.OrderDetail;
+import com.niit.shoppingcart.model.OrderedItems;
 import com.niit.shoppingcart.model.Product;
+import com.niit.shoppingcart.model.ShippingAddress;
 import com.niit.shoppingcart.model.Supplier;
 import com.niit.shoppingcart.model.UserDetails;
 
@@ -29,7 +38,7 @@ public class ApplicationContextConfiguration {
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.h2.Driver");
-		dataSource.setUrl("jdbc:h2:tcp://localhost/~/test");
+		dataSource.setUrl("jdbc:h2:tcp://localhost/~/test3");
 		dataSource.setUsername("sa");
 		dataSource.setPassword("sa");
 		return dataSource;
@@ -53,6 +62,14 @@ public class ApplicationContextConfiguration {
 		sessionBuilder.addAnnotatedClasses(Product.class);
 		sessionBuilder.addAnnotatedClass(Supplier.class);
 		sessionBuilder.addAnnotatedClass(UserDetails.class);
+		sessionBuilder.addAnnotatedClasses(BillingAddress.class);
+		sessionBuilder.addAnnotatedClass(CardDetail.class);
+		sessionBuilder.addAnnotatedClass(Cart.class);
+		sessionBuilder.addAnnotatedClasses(CheckoutDetails.class);
+		sessionBuilder.addAnnotatedClass(OrderDetail.class);
+		sessionBuilder.addAnnotatedClasses(OrderedItems.class);
+		sessionBuilder.addAnnotatedClass(ShippingAddress.class);
+		
 		return sessionBuilder.buildSessionFactory();
 	}
 

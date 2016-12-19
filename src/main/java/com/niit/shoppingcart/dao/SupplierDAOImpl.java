@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.niit.shoppingcart.model.Category;
 import com.niit.shoppingcart.model.Supplier;
 
 @Repository("supplierDAO")
@@ -72,5 +73,20 @@ public class SupplierDAOImpl implements SupplierDAO {
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		return query.list();
 	}
+	
+	@Transactional
+	public Supplier getByName(String name){
+		String hql= " from Supplier where name ="+"'"+name+"'";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<Supplier> list = (List<Supplier>) query.list();
+		if(list != null && !list.isEmpty())
+		{
+			return list.get(0);
+		}
+		else
+		{
+			return null;
+		}
 
+}
 }

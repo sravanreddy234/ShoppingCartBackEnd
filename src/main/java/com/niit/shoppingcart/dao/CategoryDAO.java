@@ -2,9 +2,8 @@ package com.niit.shoppingcart.dao;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-
 import com.niit.shoppingcart.model.Category;
+import com.niit.shoppingcart.model.Product;
 
 public interface CategoryDAO {
 	public boolean save(Category category);
@@ -16,4 +15,14 @@ public interface CategoryDAO {
 	public Category get(String id);
 
 	public List<Category> list();
+	
+	public List<Category> listCategory();
+	
+    List<Product> selectedCategoryProductList(String id);
+	
+	List<Product> selectAllCategoryProducts(String categoryId);
+	
+	int getProductCountByCategory(String id);
+	
+	public Category getByName(String name);
 }

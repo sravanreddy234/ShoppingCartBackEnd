@@ -76,8 +76,10 @@ public class UserDetailsDAOImpl implements UserDetailsDAO {
 		String hql="from UserDetails where id='"+ id +"' and password='" + password +"'";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		List<UserDetails> list = query.list();
-		if(list == null || list.isEmpty())
+		if(list != null && !list.isEmpty())
+	
 		{
+			 
 			return true;
 		}
 		else
@@ -94,6 +96,10 @@ public class UserDetailsDAOImpl implements UserDetailsDAO {
 		String hql = "from UserDetails";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		return query.list();
+	}
+	public UserDetails getCustomerByUserName(String userName) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

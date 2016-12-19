@@ -16,4 +16,6 @@ public interface UserDetailsDAO {
 	public boolean isValidUser(String id,String password);
 
 	public List<UserDetails> list();
+	
+	UserDetails getCustomerByUserName(String userName);
 }
